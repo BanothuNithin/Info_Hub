@@ -1,0 +1,159 @@
+/* src/components/Converter.css */
+
+.converter-card {
+  max-width: 620px;
+  margin: 24px auto;
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fffaf0, #f7fbff);
+  box-shadow: 0 12px 32px rgba(6, 24, 80, 0.08);
+  text-align: center;
+  position: relative;
+}
+
+.converter-title {
+  font-size: 1.4rem;
+  color: #2f3e78;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+/* top area: coin + controls */
+.converter-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* coin */
+.coin-wrap {
+  width: 110px;
+  height: 110px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.85),
+      rgba(255, 255, 255, 0.12)
+    ),
+    linear-gradient(180deg, #f9d07a, #e0a531);
+  box-shadow: 0 12px 30px rgba(224, 150, 28, 0.18),
+    inset 0 -6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+.coin-wrap:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(224, 150, 28, 0.22);
+}
+
+.coin {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  transition: transform 240ms ease;
+}
+
+/* spin while loading */
+.spin {
+  animation: spinCoin 1s linear infinite;
+}
+
+/* controls */
+.controls-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.amount-input,
+.to-select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 2px solid #e6eefb;
+  outline: none;
+  min-width: 120px;
+  transition: box-shadow 200ms ease, transform 120ms ease;
+}
+
+.amount-input:focus,
+.to-select:focus {
+  box-shadow: 0 8px 22px rgba(10, 56, 122, 0.08);
+  border-color: #7aa7ff;
+  transform: translateY(-2px);
+}
+
+/* attractive convert button */
+.convert-btn {
+  background: linear-gradient(180deg, #0077ff, #0056c7);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 8px 22px rgba(4, 54, 129, 0.18);
+}
+
+.convert-btn:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 14px 30px rgba(4, 54, 129, 0.22);
+}
+
+.convert-btn:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.convert-btn:disabled {
+  opacity: 0.65;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+/* results */
+.convert-result {
+  margin-top: 14px;
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(10, 34, 80, 0.05);
+  display: inline-block;
+  min-width: 220px;
+  text-align: left;
+}
+
+.rate {
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+.converted {
+  margin: 0 0 6px 0;
+  font-size: 1.05rem;
+}
+
+.muted {
+  color: #6b7380;
+  font-size: 0.85rem;
+}
+.error {
+  color: #c93a3a;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+/* spin keyframes */
+@keyframes spinCoin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}

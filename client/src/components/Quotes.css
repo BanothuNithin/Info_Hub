@@ -1,0 +1,184 @@
+/* Quotes.css - place next to Quotes.jsx */
+
+.quotes-card {
+  position: relative;
+  max-width: 760px;
+  margin: 28px auto;
+  border-radius: 16px;
+  overflow: hidden;
+  color: #07203a;
+  box-shadow: 0 14px 40px rgba(2, 18, 41, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.95)
+  );
+}
+
+/* background image layer (subtle animated scale) */
+.quotes-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.85) brightness(0.85);
+  transform-origin: center;
+  z-index: 0;
+  transition: transform 20s linear;
+  animation: slowZoom 30s linear infinite;
+  opacity: 0.95;
+}
+
+/* overlay to darken for text contrast */
+.quotes-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0.6)
+  );
+  z-index: 1;
+}
+
+/* content wrapper (on top of bg) */
+.quotes-content {
+  position: relative;
+  z-index: 2;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+/* title */
+.quotes-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #0b3b5f;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+/* controls */
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* button style matches other components */
+.quotes-btn {
+  background: linear-gradient(180deg, #0077ff, #0056c7);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(4, 54, 129, 0.12);
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms;
+}
+.quotes-btn:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(4, 54, 129, 0.16);
+}
+.quotes-btn:active:not(:disabled) {
+  transform: translateY(-2px) scale(0.995);
+}
+.quotes-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* quote box */
+.quotes-box {
+  min-height: 80px;
+  max-width: 720px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 18px rgba(2, 18, 41, 0.04);
+}
+
+/* quote style */
+.quote {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #07203a;
+  text-align: center;
+  padding: 0 8px;
+  font-style: italic;
+  max-width: 680px;
+}
+
+/* small footer text */
+.quotes-footer {
+  font-size: 0.88rem;
+  color: #516a7d;
+  margin-top: 6px;
+}
+
+/* Muted / error classes */
+.muted {
+  color: #6b7380;
+}
+.error {
+  color: #c93a3a;
+  font-weight: 600;
+}
+
+/* Animations: slow zoom background */
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* animate quote in */
+@keyframes quoteIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.995);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* small emphasis pulse when quote appears */
+.animate-quote {
+  animation: quoteIn 700ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+/* responsiveness */
+@media (max-width: 640px) {
+  .quotes-content {
+    padding: 18px;
+  }
+  .quote {
+    font-size: 1rem;
+  }
+  .quotes-btn {
+    padding: 10px 14px;
+  }
+}
