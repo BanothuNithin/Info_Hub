@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       // Proxy /api/* to backend running on port 4000
       "/api": {
-        target: "http://localhost:4000",
+        target: "https://info-hubaa.onrender.com",
         changeOrigin: true,
         secure: false,
       },
