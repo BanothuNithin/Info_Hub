@@ -15,7 +15,8 @@ export default function Quotes() {
     setQuote(null);
 
     try {
-      const url = `${BASE_URL}/api/quote`;
+      // build endpoint on BASE_URL (BASE_URL defaults to "/api")
+      const url = `${BASE_URL}/quote`;
       const res = await fetch(url);
       if (!res.ok) {
         const errJson = await res.json().catch(() => null);

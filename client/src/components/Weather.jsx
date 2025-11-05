@@ -27,9 +27,8 @@ export default function Weather() {
     setData(null);
 
     try {
-      const url = `${BASE_URL}/api/weather?city=${encodeURIComponent(
-        city.trim()
-      )}`;
+      // build endpoint on BASE_URL (BASE_URL defaults to "/api")
+      const url = `${BASE_URL}/weather?city=${encodeURIComponent(city.trim())}`;
       const res = await fetch(url);
       if (!res.ok) {
         const errJson = await res.json().catch(() => null);

@@ -23,8 +23,7 @@ export default function Converter() {
     setLoading(true);
 
     try {
-      // BASE_URL already defaults to "/api" via src/api.js
-      // build endpoint as `${BASE_URL}/convert` to avoid double "/api/api" when BASE_URL === "/api"
+      // build endpoint on BASE_URL (BASE_URL defaults to "/api")
       const url = `${BASE_URL}/convert?from=INR&to=${encodeURIComponent(
         to
       )}&amount=${encodeURIComponent(amount)}`;
