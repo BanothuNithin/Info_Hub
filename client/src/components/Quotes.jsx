@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "./Quotes.css";
 import bgImg from "../assets/quoto.png";
-import { BASE_URL } from "../api";
+import { buildUrl } from "../api";
 
 export default function Quotes() {
   const [quote, setQuote] = useState(null);
@@ -15,8 +15,8 @@ export default function Quotes() {
     setQuote(null);
 
     try {
-      // build endpoint on BASE_URL (BASE_URL defaults to "/api")
-      const url = `${BASE_URL}/quote`;
+  // build endpoint using helper (handles local proxy vs remote BASE_URL)
+  const url = buildUrl(`/quote`);
       const res = await fetch(url);
       if (!res.ok) {
         const errJson = await res.json().catch(() => null);

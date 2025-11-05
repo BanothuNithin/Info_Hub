@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "../styles.css";
 import "./Weather.css";
 import cloudImg from "../assets/cloud.png";
-import { BASE_URL } from "../api";
+import { buildUrl } from "../api";
 
 export default function Weather() {
   const [city, setCity] = useState("Hyderabad");
@@ -27,8 +27,10 @@ export default function Weather() {
     setData(null);
 
     try {
-      // build endpoint on BASE_URL (BASE_URL defaults to "/api")
-      const url = `${BASE_URL}/weather?city=${encodeURIComponent(city.trim())}`;
+      // build endpoint using helper (handles local proxy vs remote BASE_URL)
+      const url = buildUrl(`/weather`) + `?city=${encodeURIComponent(
+        city.trim()
+      )}`;
       const res = await fetch(url);
       if (!res.ok) {
         const errJson = await res.json().catch(() => null);

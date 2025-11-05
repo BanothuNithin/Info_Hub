@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import coinImg from "../assets/coin.png";
 import "./Converter.css";
-import { BASE_URL } from "../api";
+import { buildUrl } from "../api";
 
 export default function Converter() {
   const [amount, setAmount] = useState(100);
@@ -23,8 +23,8 @@ export default function Converter() {
     setLoading(true);
 
     try {
-      // build endpoint on BASE_URL (BASE_URL defaults to "/api")
-      const url = `${BASE_URL}/convert?from=INR&to=${encodeURIComponent(
+      // build endpoint using helper (handles local proxy vs remote BASE_URL)
+      const url = `${buildUrl(`/convert`)}?from=INR&to=${encodeURIComponent(
         to
       )}&amount=${encodeURIComponent(amount)}`;
 
