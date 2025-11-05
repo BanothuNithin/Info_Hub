@@ -1,6 +1,8 @@
+// src/components/Quotes.jsx
 import React, { useState } from "react";
 import "./Quotes.css";
 import bgImg from "../assets/quoto.png";
+import { BASE_URL } from "../api";
 
 export default function Quotes() {
   const [quote, setQuote] = useState(null);
@@ -13,7 +15,8 @@ export default function Quotes() {
     setQuote(null);
 
     try {
-      const res = await fetch("/api/quote");
+      const url = `${BASE_URL}/api/quote`;
+      const res = await fetch(url);
       if (!res.ok) {
         const errJson = await res.json().catch(() => null);
         throw new Error(errJson?.error || `Failed (${res.status})`);
@@ -29,13 +32,11 @@ export default function Quotes() {
 
   return (
     <div className="quotes-card">
-      {/* animated background */}
       <div
         className="quotes-bg"
         style={{ backgroundImage: `url(${bgImg})` }}
         aria-hidden
       />
-
       <div className="quotes-content">
         <h2 className="quotes-title">Motivational Quote</h2>
 
@@ -53,7 +54,6 @@ export default function Quotes() {
         <div className="quotes-box">
           {loading && <p className="muted">Fetching inspiration…</p>}
           {error && <p className="error">{error}</p>}
-
           {quote ? (
             <blockquote className="quote animate-quote">{quote}</blockquote>
           ) : (

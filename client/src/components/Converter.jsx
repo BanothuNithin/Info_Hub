@@ -1,7 +1,8 @@
 // src/components/Converter.jsx
 import React, { useState } from "react";
-import coinImg from "../assets/coin.png"; // put coin.png here
+import coinImg from "../assets/coin.png";
 import "./Converter.css";
+import { BASE_URL } from "../api";
 
 export default function Converter() {
   const [amount, setAmount] = useState(100);
@@ -22,13 +23,12 @@ export default function Converter() {
     setLoading(true);
 
     try {
-      const url = `/api/convert?from=INR&to=${encodeURIComponent(
+      const url = `${BASE_URL}/api/convert?from=INR&to=${encodeURIComponent(
         to
       )}&amount=${encodeURIComponent(amount)}`;
-      console.log("Fetching:", url);
 
       const res = await fetch(url);
-      const text = await res.text(); // read raw body
+      const text = await res.text();
       let body;
       try {
         body = JSON.parse(text);
@@ -36,21 +36,16 @@ export default function Converter() {
         body = text;
       }
 
-      console.log("Response status:", res.status, "body:", body);
-
       if (!res.ok) {
-        // try to show a helpful error
         const serverMsg =
           (body && body.error) ||
           (body && body.message) ||
-          JSON.stringify(body);
-        throw new Error(serverMsg || `Server ${res.status}`);
+          JSON.stringify(body) ||
+          `Server ${res.status}`;
+        throw new Error(serverMsg);
       }
 
-      // normalize shape: backend returns { source, data } OR direct data
       const payload = (body && (body.data ?? body)) ?? body;
-
-      // If exchangerate.host style (payload.result) keep it, else try to map
       setResult(payload);
     } catch (err) {
       console.error("Convert error:", err);

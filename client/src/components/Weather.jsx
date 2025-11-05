@@ -1,8 +1,9 @@
 // src/components/Weather.jsx
 import React, { useState, useEffect } from "react";
-import "../styles.css"; // keep if you use a global stylesheet
-import "./Weather.css"; // new CSS for the weather component
+import "../styles.css";
+import "./Weather.css";
 import cloudImg from "../assets/cloud.png";
+import { BASE_URL } from "../api";
 
 export default function Weather() {
   const [city, setCity] = useState("Hyderabad");
@@ -10,7 +11,6 @@ export default function Weather() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  // Optionally fetch initial city on mount
   useEffect(() => {
     fetchWeather();
     // eslint-disable-next-line
@@ -27,16 +27,15 @@ export default function Weather() {
     setData(null);
 
     try {
-      const res = await fetch(
-        `/api/weather?city=${encodeURIComponent(city.trim())}`
-      );
+      const url = `${BASE_URL}/api/weather?city=${encodeURIComponent(
+        city.trim()
+      )}`;
+      const res = await fetch(url);
       if (!res.ok) {
-        // try to parse JSON error body
         const errJson = await res.json().catch(() => null);
         throw new Error(errJson?.error || `Failed (${res.status})`);
       }
       const json = await res.json();
-      // the modular backend returns { source: ..., data: {...} } for real provider
       const payload = json.data || json;
       setData(payload);
     } catch (err) {
@@ -60,21 +59,19 @@ export default function Weather() {
       </div>
 
       <div className="weather-visual">
-        {/* Animated clouds — multiple for depth */}
         <div className="clouds">
           <img src={cloudImg} alt="cloud" className="cloud c1" />
           <img src={cloudImg} alt="cloud" className="cloud c2" />
           <img src={cloudImg} alt="cloud" className="cloud c3" />
         </div>
 
-        {/* Weather summary overlay */}
         <div className="weather-overlay">
           {loading && <p className="muted">Loading…</p>}
           {error && <p className="error">{error}</p>}
           {data ? (
             <div className="result">
               <h3>{data.name ?? data.city ?? "—"}</h3>
-              <p className="big-temp"> {data.main?.temp ?? "—"} °C</p>
+              <p className="big-temp">{data.main?.temp ?? "—"} °C</p>
               <p>Humidity: {data.main?.humidity ?? "—"}%</p>
               <p className="muted">{data.weather?.[0]?.description ?? "—"}</p>
             </div>
