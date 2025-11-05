@@ -105,22 +105,6 @@ Visit: http://localhost:5173
 		- App.jsx
 	- vite.config.js (contains `/api` proxy to backend)
 
-## Demo & Submission
-
-- Record a short (2–3 minute) video walkthrough showing:
-	- The three modules working (weather, currency, quotes)
-	- Error/loading states
-	- How to run locally
-- Upload the video and source code (ZIP or GitHub repo) to a Google Drive folder with "Anyone with link" access.
-
-Include a link to the Drive folder in your submission.
-
-If you want, I can also:
-- Add a small CONTRIBUTING.md and CODE_OF_CONDUCT
-- Wire a real exchange-rate API and add environment variable instructions
-- Create a tiny demo script or GitHub Actions workflow to deploy both sides automatically
-
-Tell me which of those you'd like and I'll add it.
-
 # Info_Hub
+
 
