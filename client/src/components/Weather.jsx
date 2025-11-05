@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "../styles.css";
 import "./Weather.css";
 import cloudImg from "../assets/cloud.png";
+import { BASE_URL } from "../api";
 
 export default function Weather() {
   const [city, setCity] = useState("Hyderabad");
@@ -26,7 +27,9 @@ export default function Weather() {
     setData(null);
 
     try {
-      const url = `/api/weather?city=${encodeURIComponent(city.trim())}`;
+      const url = `${BASE_URL}/api/weather?city=${encodeURIComponent(
+        city.trim()
+      )}`;
       const res = await fetch(url);
       if (!res.ok) {
         const errJson = await res.json().catch(() => null);

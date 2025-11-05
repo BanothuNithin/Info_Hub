@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import "./Quotes.css";
 import bgImg from "../assets/quoto.png";
+import { BASE_URL } from "../api";
 
 export default function Quotes() {
   const [quote, setQuote] = useState(null);
@@ -14,7 +15,7 @@ export default function Quotes() {
     setQuote(null);
 
     try {
-      const url = `/api/quote`;
+      const url = `${BASE_URL}/api/quote`;
       const res = await fetch(url);
       if (!res.ok) {
         const errJson = await res.json().catch(() => null);
