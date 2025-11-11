@@ -21,15 +21,7 @@ export default function App() {
       </header>
 
       <nav className="tabs" role="tablist" aria-label="InfoHub navigation">
-        <button
-          role="tab"
-          aria-selected={tab === "weather"}
-          onClick={() => setTab("weather")}
-          className={tab === "weather" ? "active" : ""}
-        >
-          Weather
-        </button>
-
+        
         <button
           role="tab"
           aria-selected={tab === "converter"}
@@ -38,7 +30,14 @@ export default function App() {
         >
           Converter
         </button>
-
+        <button
+          role="tab"
+          aria-selected={tab === "weather"}
+          onClick={() => setTab("weather")}
+          className={tab === "weather" ? "active" : ""}
+        >
+          Weather
+        </button>
         <button
           role="tab"
           aria-selected={tab === "quotes"}
